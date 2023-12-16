@@ -25,9 +25,6 @@ app.post('/posts', async (req, res) => {
       content: req.body.content,
       posted_by: req.body.posted_by,
       community: req.body.community,
-      post_date_time: 1,
-      url: "none",
-      
     });
   
     try {

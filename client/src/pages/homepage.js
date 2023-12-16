@@ -20,7 +20,15 @@ function HomePage(props){
         <div className="homepage">
             <div className="hp-posts" id="hp-posts">
                 <p>test</p>
-                <ShowPosts/>
+                {/* <ShowPosts/> */}
+                <ul>
+                    {props.posts.map(post => (
+                    <li key={post._id} class="home-posts">
+                        <h2>{post.title}</h2>
+                        <p>{post.content}</p>
+                    </li>
+                    ))}
+                </ul>
             </div>
 
         </div>
