@@ -7,4 +7,20 @@ body {
 
 #navigation-bar{
     background-color: rgb(48, 54, 54);
+    position: fixed;
+    top: 0;
+    justify-content: center;
+    width:100%; 
+}
+
+.content{
+    margin-top: 8%;
+}
+
+
+.About{
+    text-align: center;
+}
+.About2{
+    padding-left: 25%;
 }

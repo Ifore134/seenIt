@@ -30,7 +30,7 @@ function App() {
       <div className="App">
         <NavBar/>
         <div className='content'>
-          <Routes>
+          <Routes className="routes">
             <Route path="/" element={<HomePage posts={posts}/>}/>
             <Route path="/about" element={<About/>}/>
             <Route path="/create" element={<CreatePost posts={posts} setPosts={setPosts}/>}/>
