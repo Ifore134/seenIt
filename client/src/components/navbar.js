@@ -4,9 +4,10 @@ export default function NavBar(){
     return (
         <nav id="navigation-bar">
             <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/about">About</Link></li>
-                <li><Link to="/create">Create Post</Link></li>
+                {/* <h2 className="nvbar-content">SeenIt</h2> */}
+                <li className="nvbar-content"><Link to="/">SeenIt</Link></li>
+                <li className="nvbar-content"><Link to="/about">About</Link></li>
+                <li className="nvbar-content"><Link to="/create">Create Post</Link></li>
             </ul>
         </nav>
     )

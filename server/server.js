@@ -6,12 +6,22 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 const Post = require("./models/posts");
+const Community = require("./models/communities");
 
 // Routes
 app.get('/posts', async (req, res) => {
   try {
     const posts = await Post.find();
     res.json(posts);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.get('/communities', async (req, res) => {
+  try {
+    const community = await Community.find();
+    res.json(Community);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

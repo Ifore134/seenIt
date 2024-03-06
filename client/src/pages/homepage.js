@@ -23,10 +23,15 @@ function HomePage(props){
                 {/* <ShowPosts/> */}
                 <ul>
                     {props.posts.map(post => (
+                        <div className="post-div">
                     <li key={post._id} class="home-posts">
-                        <h2>{post.title}</h2>
-                        <p>{post.content}</p>
+                        
+                        <h2 className="post-header">{post.title}</h2>
+                        <p className="post-content">{post.content}</p>
+                           
                     </li>
+                    <hr className="post-breaks"/>
+                    </div>
                     ))}
                 </ul>
             </div>
