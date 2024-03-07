@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
 
-const postSchema = new mongoose.Schema({
+const commentSchema = new mongoose.Schema({
     content: { type: String, required: true },
-    title: {type:String, required: true},
     posted_by: { type: String, default: "Anonyomous" },
-    post_date_time: { type: Date, default: new Date() },
-    comments: {type: String, default:[]},
+    comment_date_time: { type: Date, default: new Date() },
+    post: { type: String, default: "Anonyomous" },
     community: {type: String}
   });
 
