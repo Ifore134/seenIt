@@ -1,10 +1,17 @@
 export default function PostPage(props){
+    function generateComment(){
+
+    }
     
     return(
         <div>
             <div>
             <h1>{props.post.title}</h1>
             <p>{props.post.content}</p>
+            </div>
+
+            <div className="comments">
+                <input type="text"/>
             </div>
 
             {/* <div className="post-comments">
