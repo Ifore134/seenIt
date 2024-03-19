@@ -4,6 +4,7 @@ import HomePage from './homepage';
 import About from './About';
 import NavBar from '../components/navbar';
 import CreatePost from './CreatePosts';
+import PostPage from './PostPage';
 import { BrowserRouter as Router,Route,Routes } from 'react-router-dom';
 import React,{ useState, useEffect } from 'react';
 import Model from '../components/model';
@@ -12,7 +13,8 @@ import '../stylesheets/App.css'
 let model = new Model();
 function App() {
 
-  const [posts,setPosts]=useState([]);
+  const [posts,setPosts]=useState([]);//used for posts shown on the homepage
+  const [viewPost, setViewPost]=useState(null);//Used for viewing a post when clicked
 
   useEffect(() => {
     axios.get('http://localhost:8000/posts')
@@ -31,9 +33,10 @@ function App() {
         <NavBar/>
         <div className='content'>
           <Routes className="routes">
-            <Route path="/" element={<HomePage posts={posts}/>}/>
+            <Route path="/" element={<HomePage posts={posts} setView={setViewPost}/>}/>
             <Route path="/about" element={<About/>}/>
-            <Route path="/create" element={<CreatePost posts={posts} setPosts={setPosts}/>}/>
+            <Route path="/create" element={<CreatePost posts={posts} setPosts={setPosts} />}/>
+            <Route path="/postpage" element={<PostPage post={viewPost} />}/>
           </Routes>
 
         </div>

@@ -1,4 +1,4 @@
-export default function postPage(props){
+export default function PostPage(props){
     
     return(
         <div>
@@ -7,16 +7,16 @@ export default function postPage(props){
             <p>{props.post.content}</p>
             </div>
 
-            <div className="post-comments">
+            {/* <div className="post-comments">
                 <ul>
                     {props.post.comments.map(post => (
                         <div className="post-div">
-                            {/* <p></p>g Insert method to search using comment ID*/}
+                            g Insert method to search using comment ID
                         <hr className="post-breaks"/>
                         </div>
                     ))}
                 </ul>
-            </div>
+            </div>  */}
 
         </div>
     )
