@@ -15,6 +15,7 @@ function App() {
 
   const [posts,setPosts]=useState([]);//used for posts shown on the homepage
   const [viewPost, setViewPost]=useState(null);//Used for viewing a post when clicked
+  const [comments, setComments]= useState([]);
 
   useEffect(() => {
     axios.get('http://localhost:8000/posts')
@@ -24,6 +25,16 @@ function App() {
       })
       .catch(error => {
         console.error('Error fetching posts:', error);
+      });
+  }, []);
+  useEffect(() => {
+    axios.get('http://localhost:8000/comments')
+      .then(response => {
+        console.log('Posts fetched successfully:', response.data);
+        setComments(response.data); // Update the state with the fetched posts
+      })
+      .catch(error => {
+        console.error('Error fetching comments:', error);
       });
   }, []);
 
@@ -36,7 +47,8 @@ function App() {
             <Route path="/" element={<HomePage posts={posts} setView={setViewPost}/>}/>
             <Route path="/about" element={<About/>}/>
             <Route path="/create" element={<CreatePost posts={posts} setPosts={setPosts} />}/>
-            <Route path="/postpage" element={<PostPage post={viewPost} />}/>
+            <Route path="/postpage" element={<PostPage post={viewPost} 
+            posts={posts} comments={comments}  setComments={setComments} setPosts={setPosts}/>}/>
           </Routes>
 
         </div>

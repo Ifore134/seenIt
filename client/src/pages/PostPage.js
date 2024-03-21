@@ -1,6 +1,32 @@
+import axios from 'axios';
+import React,{ useState, useEffect } from 'react';
 export default function PostPage(props){
-    function generateComment(){
+    const generateComment=(e) =>{
+            if (e.key ==="Enter"){
+                e.preventDefault();
+                const com = e.target.value
+                const postId = props.post._id
+                const commentData={
+                    content: com
+                }
 
+                axios.post(`http://localhost:8000/comments/${postId}`, commentData)
+                .then(response => {
+                    console.log('Comment created:', response.data);
+                    // You can update the UI to show the new comment
+                    props.setComments([...props.comments, response.data]);
+                    props.post.comments.push(response.data._id)
+                    // props.setPosts(props.posts)
+                })
+                .catch(error => {
+                    console.error('Error creating comment:', error);
+                });
+
+                
+                   
+                  
+                
+            }
     }
     
     return(
@@ -11,7 +37,23 @@ export default function PostPage(props){
             </div>
 
             <div className="comments">
-                <input type="text"/>
+                <input type="text" onKeyDown={generateComment} placeholder="Comment..."/>
+                <div className="post-comments">
+                    {console.log(props.post.comments)}
+                    {console.log("here")}
+                    <ul>
+                        {props.comments.filter(c => props.post.comments.includes(c._id)
+                        ).map(c => (
+                            <li>
+                            <div className="post-div">
+                                {console.log(c)}
+                                <p>{c.content}</p>
+                            <hr className="post-breaks"/>
+                            </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div> 
             </div>
 
             {/* <div className="post-comments">

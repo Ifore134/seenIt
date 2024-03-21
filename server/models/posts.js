@@ -5,7 +5,7 @@ const postSchema = new mongoose.Schema({
     title: {type:String, required: true},
     posted_by: { type: String, default: "Anonyomous" },
     post_date_time: { type: Date, default: new Date() },
-    comments: {type: String, default:[]},
+    comments: {type: Array, default:[]},
     community: {type: String}
   });
 

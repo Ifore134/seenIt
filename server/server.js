@@ -7,6 +7,7 @@ app.use(cors());
 app.use(express.json());
 const Post = require("./models/posts");
 const Community = require("./models/communities");
+const Comment = require("./models/comments");
 
 // Routes
 app.get('/posts', async (req, res) => {
@@ -21,7 +22,15 @@ app.get('/posts', async (req, res) => {
 app.get('/communities', async (req, res) => {
   try {
     const community = await Community.find();
-    res.json(Community);
+    res.json(community);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+app.get('/comments', async (req, res) => {
+  try {
+    const comment = await Comment.find();
+    res.json(comment);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -45,6 +54,27 @@ app.post('/posts', async (req, res) => {
       res.status(400).json({ message: error.message });
     }
   });
+
+  app.post('/comments/:postId', async (req, res) => {
+    const { postId } = req.params;
+    //const { text, author } = req.body; // Adjust according to your comment structure
+    const { content } = req.body;
+    // const comment = new Comment({
+    //   content: req.body.content, 
+    // })
+
+    try {
+        // Create a new comment
+        const commentTest = await Comment.create({ content });
+        // const newComment = await comment.save();
+        // Find the post and add the comment's ID to the post's comments array
+        await Post.findByIdAndUpdate(postId, { $push: { comments: commentTest._id } });
+
+        res.status(201).json(commentTest);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
   
 
 
