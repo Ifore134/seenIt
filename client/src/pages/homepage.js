@@ -35,7 +35,7 @@ function HomePage(props){
                         
                         <h2 className="post-header">{post.title}</h2>
                         <p className="post-content">{post.content}</p>
-                        <p className="post-time">{post.post_date_time}</p>
+                        <p className="post-time">{post.post_date_time.slice(5,10)}</p>
                     </li>
                     <hr className="post-breaks"/>
                     </div>

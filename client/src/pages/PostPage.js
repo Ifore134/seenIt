@@ -30,10 +30,13 @@ export default function PostPage(props){
     }
     
     return(
-        <div>
-            <div>
+        <div id="postpage">
+            <div id='pstpg-header'>
             <h1>{props.post.title}</h1>
-            <p>{props.post.content}</p>
+            <p  id='pstpg-author'>Posted by: <p id='pstpg-author-inner'>{props.post.posted_by}</p> on {props.post.post_date_time.slice(5,10)} </p>
+            <p className='pstpg-cont'>{props.post.content}</p>
+            
+            
             </div>
 
             <div className="comments">
