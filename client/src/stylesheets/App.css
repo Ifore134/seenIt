@@ -6,6 +6,13 @@ body {
 .home-posts{
     list-style-type: none; /* Remove bullets */
 }
+.homepage{
+    margin-left: 0;
+    margin-right: 3%;
+}
+.post-content{
+    text-align: center;
+}
 .post-header{
     text-align: center;
 }
