@@ -6,6 +6,7 @@ import NavBar from '../components/navbar';
 import CreatePost from './CreatePosts';
 import PostPage from './PostPage';
 import Registration from './Registration';
+import Login from './Login';
 import { BrowserRouter as Router,Route,Routes } from 'react-router-dom';
 import React,{ useState, useEffect } from 'react';
 import Model from '../components/model';
@@ -46,9 +47,10 @@ function App() {
         <NavBar/>
         <div className='content'>
           <Routes className="routes">
-            <Route path="/" element={<HomePage posts={posts} setView={setViewPost}/>}/>
+            <Route path="/login" element={<Login setUser={setUser}/>}/> 
+            <Route path="/" element={<HomePage posts={posts} setView={setViewPost} user={user}/>}/>
             <Route path="/about" element={<About/>}/>
-            <Route path="/create" element={<CreatePost posts={posts} setPosts={setPosts} />}/>
+            <Route path="/create" element={<CreatePost posts={posts} setPosts={setPosts} user={user}/>}/>
             <Route path="/postpage" element={<PostPage post={viewPost} 
             posts={posts} comments={comments}  setComments={setComments} setPosts={setPosts}/>}/>
             <Route path="/register"  element={<Registration setUser={setUser}   />}  />

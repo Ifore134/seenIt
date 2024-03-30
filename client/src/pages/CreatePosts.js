@@ -22,13 +22,17 @@ export default function CreatePost(props){
       
 
     function handleSubmit(){
+      if(props.user===null){
+        alert("You must be logged in to post");
+        return
+      }
         let model=props.posts
         let newtitle=document.getElementById("post-title").value;
         let newtext=document.getElementById("post-text").value;
         let newPost={
             title:newtitle,
             content:newtext,
-            posted_by: "test",
+            posted_by: props.user.username,
             community: "popular"
         }
         createPost(newPost)

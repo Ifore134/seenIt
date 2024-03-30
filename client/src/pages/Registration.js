@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../stylesheets/register.css'
+import { Link, useNavigate } from "react-router-dom";
 const Registration = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] =useState('');
-
+  const navigate =useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -18,6 +19,7 @@ const Registration = (props) => {
       setMessage('Registration successful!');
       props.setUser(res.data)
       console.log(res.data);
+      navigate("/login");
     } catch (error) {
       setMessage('Registration failed!');
       console.error(error);
