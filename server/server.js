@@ -38,17 +38,68 @@ app.get('/comments', async (req, res) => {
   }
 });
 
-app.post('/api/auth/register', async (req, res) => {
+app.post('/api/auth/login', async (req, res) => {
   try {
-    const { username, password, email } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 12);
-    const user = new User({ username, password: hashedPassword, email });
-    await user.save();
-    res.status(201).send('User created');
+    const { username, password } = req.body;
+
+    // Find the user by username
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(400).send('User not found');
+    }
+
+    // Compare the submitted password with the one stored in the database
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).send('Invalid credentials');
+    }
+
+    // Prepare user data to send back, excluding the password
+    const userResponse = {
+      _id: user._id,
+      username: user.username,
+      email: user.email
+    };
+
+    res.json(userResponse);
   } catch (error) {
     res.status(500).send(error.message);
   }
 });
+
+
+app.post('/api/auth/register', async (req, res) => {
+  try {
+    const { username, password, email } = req.body;
+    
+    // Check if the user or email already exists
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).send('Username already exists');
+    }
+
+    const existingEmail = await User.findOne({ email });
+    if (existingEmail) {
+      return res.status(400).send('Email already exists');
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const user = new User({ username, email, password: hashedPassword });
+    const savedUser = await user.save();
+
+    // Exclude password and other sensitive fields from the response
+    const userResponse = {
+      _id: savedUser._id,
+      username: savedUser.username,
+      email: savedUser.email
+    };
+
+    res.status(201).json(userResponse);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
 
 app.post('/posts', async (req, res) => {
     console.log('POST request received:', req.body); // Log the request body

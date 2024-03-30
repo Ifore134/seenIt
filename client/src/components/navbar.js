@@ -8,6 +8,7 @@ export default function NavBar(){
                 <li className="nvbar-content"><Link to="/">SeenIt</Link></li>
                 <li className="nvbar-content"><Link to="/about">About</Link></li>
                 <li className="nvbar-content"><Link to="/create">Create Post</Link></li>
+                <li className="nvbar-content"><Link to="/login">Login</Link></li>
             </ul>
         </nav>
     )
