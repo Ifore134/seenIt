@@ -5,6 +5,7 @@ import About from './About';
 import NavBar from '../components/navbar';
 import CreatePost from './CreatePosts';
 import PostPage from './PostPage';
+import Registration from './Registration';
 import { BrowserRouter as Router,Route,Routes } from 'react-router-dom';
 import React,{ useState, useEffect } from 'react';
 import Model from '../components/model';
@@ -16,6 +17,7 @@ function App() {
   const [posts,setPosts]=useState([]);//used for posts shown on the homepage
   const [viewPost, setViewPost]=useState(null);//Used for viewing a post when clicked
   const [comments, setComments]= useState([]);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     axios.get('http://localhost:8000/posts')
@@ -49,6 +51,7 @@ function App() {
             <Route path="/create" element={<CreatePost posts={posts} setPosts={setPosts} />}/>
             <Route path="/postpage" element={<PostPage post={viewPost} 
             posts={posts} comments={comments}  setComments={setComments} setPosts={setPosts}/>}/>
+            <Route path="/register"  element={<Registration setUser={setUser}   />}  />
           </Routes>
 
         </div>
