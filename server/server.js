@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const express = require("express");
+const bcrypt = require("bcryptjs")
 const app = express();
 const port = 8000;
 const cors = require("cors");
@@ -8,6 +9,7 @@ app.use(express.json());
 const Post = require("./models/posts");
 const Community = require("./models/communities");
 const Comment = require("./models/comments");
+const User = require("./models/user");
 
 // Routes
 app.get('/posts', async (req, res) => {
@@ -33,6 +35,18 @@ app.get('/comments', async (req, res) => {
     res.json(comment);
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+});
+
+app.post('/api/auth/register', async (req, res) => {
+  try {
+    const { username, password, email } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const user = new User({ username, password: hashedPassword, email });
+    await user.save();
+    res.status(201).send('User created');
+  } catch (error) {
+    res.status(500).send(error.message);
   }
 });
 
@@ -78,7 +92,7 @@ app.post('/posts', async (req, res) => {
   
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/seenit')
+mongoose.connect('mongodb+srv://fishkid134:APBxVp0M4rd9Pdyg@seenitcluster.fxrnort.mongodb.net/?retryWrites=true&w=majority&appName=seenItCluster')
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Could not connect to MongoDB', err));
 
@@ -86,3 +100,4 @@ mongoose.connect('mongodb://127.0.0.1:27017/seenit')
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
