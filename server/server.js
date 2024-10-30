@@ -141,9 +141,9 @@ app.post('/posts', async (req, res) => {
     }
 });
   
+var old_serv ="mongodb+srv://fishkid134:APBxVp0M4rd9Pdyg@seenitcluster.fxrnort.mongodb.net/?retryWrites=true&w=majority&appName=seenItCluster"
 
-
-mongoose.connect('mongodb+srv://fishkid134:APBxVp0M4rd9Pdyg@seenitcluster.fxrnort.mongodb.net/?retryWrites=true&w=majority&appName=seenItCluster')
+mongoose.connect('mongodb://127.0.0.1:27017/seenit')
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Could not connect to MongoDB', err));
 
